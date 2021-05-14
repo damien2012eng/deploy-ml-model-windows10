@@ -11,7 +11,7 @@ Serving a simple machine learning model as a webservice using [flask](http://fla
     * Next, test the model prediction using Postman. Select `Post` - Set `http://localhost:80/predict` as the url - Select `JSON` as the content type - Input `[5.9,3.0,5.1,1.8]` in the body section. - Received `2` as the predicted result.
     For details see the attached image.
     <p align="center">
-     <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/images/localPredict.JPG">
+     <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/localPredict.JPG">
     </p>
 
  3. Run ```docker build -t app-iris .``` to  build the docker image using ```Dockerfile```. (Pay attention to the period in the docker build command). Run `docker images`, a new image named as "app-iris" should be now available. You can also check images and containers within the docker desktop.
@@ -26,12 +26,12 @@ If you are new to AWS, Tanuj's [blog](https://towardsdatascience.com/simple-way-
   * Download the pem file from the AWS as followed the Tanuj's blog. Open [PuttyGen](https://www.puttygen.com/) to generate a ppk file from the downloaded pem file.
   * Make a connection from the local to the AWS EC2. Go to AWS instance, copy the Public IPV4 address to -Putty -Session -Host Name. Next, load the ppk file that we just generated to -Putty -Connection -SSH -Auth -Private Key file for authentication. Click the Open button in the buttom, a Putty window will pop up. Insert `ec2-user` to enter the command line interface (CLI). if you get lost, follow the steps in the [Connect to AWS EC2 instance via ssh from Windows](https://www.youtube.com/watch?v=f52IOtTqcP8&t=364s)
   <p align="center">
-   <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/images/Putty1.JPG">
+   <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/Putty1.JPG">
   </p>
   * Pass files to the AWS. There are several ways to pass files from you Windows to AWS. What I used here is WinSCP, which provides a good User Interface. Follow the instruction [Open EC2 Instance in Windows - Putty , WinSCP | AWS EC2 tutorial for beginners](https://www.youtube.com/watch?v=F2HNtz2Z-00) to establish the connection. Make sure that you select the pem file to generate a new ppk file, and load the ppk file in the WinSCP.
   * Now you should have everything ready. Drag four files into your AWS instance. For details see the attached image.
   <p align="center">
-   <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/images/WinSCP3.JPG">
+   <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/WinSCP3.JPG">
   </p>
   * Go back to your Putty CLI. Insert `ls` to double-check if the file are present. Perform the docker installations on the AWS.
   ``` sudo amazon-linux-extras install docker
