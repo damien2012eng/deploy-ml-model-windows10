@@ -13,7 +13,7 @@ Serving a simple machine learning model as a webservice using [flask](http://fla
 
    - Next, test the model prediction by inputting float from **0.0 - 4.0**, once click the button below. You should see the predicted results displayed at the bottom.
    <p align="center">
-    <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/blob/main/images/localPredict.JPG">
+    <img  src="https://github.com/damien2012eng/deploy-ml-model-windows10/blob/main/Predict.JPG">
    </p>
 
 3. Run `docker build -t app-iris .` to build the docker image using `Dockerfile`. (Pay attention to the period in the docker build command). Run `docker images`, a new image named as "app-iris" should be now available. You can also check images and containers within the docker desktop.
