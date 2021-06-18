@@ -1,35 +1,29 @@
-# Serve model as a flask application
-
+from flask import Flask ,render_template,url_for,request
+import numpy as np 
 import pickle
-import numpy as np
-from flask import Flask, request
 
-model = None
 app = Flask(__name__)
+model = pickle.load(open('model.pkl','rb'))
 
-
-def load_model():
-    global model
-    # model variable refers to the global variable
-    with open('iris_trained_model.pkl', 'rb') as f:
-        model = pickle.load(f)
-
-
+# Home Route
 @app.route('/')
-def home_endpoint():
-    return 'Hello Damien!'
+def home():
+	return render_template('home.html')
+
+# prediction
+@app.route('/predict',methods=['POST'])
+def predict():
+	int_feature = [x for x in request.form.values()]
+	print(int_feature)
+	int_feature = [float(i) for i in int_feature]
+	final_features = [np.array(int_feature)]
+	prediction = model.predict(final_features)
+
+	output = prediction
+	print(output)
+
+	return render_template('home.html',prediction_text= output)
 
 
-@app.route('/predict', methods=['POST'])
-def get_prediction():
-    # Works only for a single sample
-    if request.method == 'POST':
-        data = request.get_json()  # Get data posted as a json
-        data = np.array(data)[np.newaxis, :]  # converts shape from (4,) to (1, 4)
-        prediction = model.predict(data)  # runs globally loaded model on the data
-    return str(prediction[0])
-
-
-if __name__ == '__main__':
-    load_model()  # load model at the beginning once only
-    app.run(host='0.0.0.0', port=80)
+if __name__ == "__main__":
+	app.run(host='0.0.0.0', port=80)
